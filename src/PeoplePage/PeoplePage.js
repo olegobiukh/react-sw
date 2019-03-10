@@ -54,10 +54,22 @@ class PeoplePage extends React.Component {
     const { location } = this.props;
     const urlParams = new URLSearchParams(location.search);
     const page = +urlParams.get("page") || 1;
+
     const category = this.props.match.params.category;
-    console.log(this.props.match);
+
+    const search = document.location.search.includes("search")
+      ? document.location.search.substring(8)
+      : "";
+    // const search = document.location.search.substring(8);
+
+    if (search !== this.state.search) {
+      this.setState({ page, category, search }, this.loadPeople);
+
+      return;
+    }
+
     if (category !== this.state.category) {
-      this.setState({ page, category }, this.loadPeople);
+      this.setState({ page, category, search }, this.loadPeople);
 
       return;
     }
@@ -66,14 +78,16 @@ class PeoplePage extends React.Component {
       return;
     }
 
-    this.setState({ page, category }, this.loadPeople);
+    this.setState({ page, category, search }, this.loadPeople);
   }
 
   loadPeople = async () => {
-    const { page, category } = this.state;
+    const { search, page, category } = this.state;
+
     const { count, results: people } = await peopleApi.getAll({
       category,
-      page
+      page,
+      search
     });
 
     this.setState({

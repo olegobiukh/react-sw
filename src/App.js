@@ -10,12 +10,21 @@ class App extends Component {
   state = {
     search: ""
   };
+
   handleFilter(value, search) {
     this.setState({ search });
+    const currentUrl = window.location.pathname.match(/\w+/g);
+    const stateObj = { search: search };
+    const url =
+      search.length === 0
+        ? currentUrl
+        : currentUrl && currentUrl + "?search=" + search;
+
+    window.history.pushState(stateObj, "url", url);
   }
+
   render() {
     const search = this.state.search;
-    // console.log(typeof search);
 
     return (
       <div className="App">
@@ -28,27 +37,19 @@ class App extends Component {
           }}
           defaultChecked
         />
-        <NavLink to={{ pathname: "/people", search: `?search=${search}` }}>People</NavLink>
-        <NavLink to={{ pathname: "/planets", search: `?search=${search}` }}>
-          Planets
-        </NavLink>
-        <NavLink to={{ pathname: "/species", search: `?search=${search}` }}>
-          Species
-        </NavLink>
-        <NavLink to={{ pathname: "/vehicles", search: `?search=${search}` }}>
-          Vehicles
-        </NavLink>
-        <NavLink
-          to={{
-            pathname: "/starships",
-            search: `?search=${search}`
-          }}
-        >
-          Starships
-        </NavLink>
+        <NavLink to="/people">People</NavLink>
+        <NavLink to="/planets">Planets</NavLink>
+        <NavLink to="/species">Species</NavLink>
+        <NavLink to="/vehicles">Vehicles</NavLink>
+        <NavLink to="/starships">Starships</NavLink>
         <section>
           <Switch>
-            <Route exact path="/:category" component={PeoplePage} />
+            <Route
+              history={this.props.history}
+              exact
+              path="/:category"
+              component={PeoplePage}
+            />
             <Route exact path="/:category/:id" component={Page} />
           </Switch>
         </section>

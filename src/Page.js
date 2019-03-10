@@ -25,6 +25,7 @@ class Page extends Component {
 
   render() {
     const data = this.state.people;
+
     // console.log(data);
     if (data) {
       return (
