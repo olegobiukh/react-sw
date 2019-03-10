@@ -28,7 +28,7 @@ class App extends Component {
           }}
           defaultChecked
         />
-        <NavLink to={{ pathname: "/people", search: search }}>People</NavLink>
+        <NavLink to={{ pathname: "/people", search: `?search=${search}` }}>People</NavLink>
         <NavLink to={{ pathname: "/planets", search: `?search=${search}` }}>
           Planets
         </NavLink>
