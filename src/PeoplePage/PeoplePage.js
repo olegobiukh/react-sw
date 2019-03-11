@@ -7,31 +7,13 @@ import Pagination from "../Common/Pagination";
 
 class PeoplePage extends React.Component {
   state = {
-    config: {
-      name: {
-        title: ["name", "title"], // в таблице колонка будет так называться
-        isSortable: true, // Поиск будет проверять эту и последнюю колонки
-        isSearchable: true
-      },
-      age: {
-        title: [
-          "birth_year",
-          "diameter",
-          "episode_id",
-          "average_height",
-          "skin_colors",
-          "passengers"
-        ],
-        isSortable: true // по этой колонке можно сортировать
-      },
-      snippet: {
-        // Только для тех ключей которые есть в columnConfig будут колонки в таблице
-        title: ["gender", "terrain", "opening_crawl", "manufacturer"],
-        isSearchable: true // В этой колонке тоже будет происходить поиск query
-      }
-    },
     columns: {
-      people: ["name", "birth_year", "gender"]
+      people: ["name", "height", "birth_year"],
+      films: ["title", "episode_id", "release_date"],
+      planets: ["name", "diameter", "terrain"],
+      species: ["name", "average_height"],
+      starships: ["name", "cost_in_credits", "model"],
+      vehicles: ["name", "model", "cost_in_credits"]
     },
 
     isLoaded: false,
@@ -60,7 +42,6 @@ class PeoplePage extends React.Component {
     const search = document.location.search.includes("search")
       ? document.location.search.substring(8)
       : "";
-    // const search = document.location.search.substring(8);
 
     if (search !== this.state.search) {
       this.setState({ page, category, search }, this.loadPeople);
@@ -98,23 +79,42 @@ class PeoplePage extends React.Component {
   };
 
   render() {
-    const { people, isLoaded, count, page, category } = this.state;
+    const { people, isLoaded, count, page, category, columns } = this.state;
+    const swData = people.map(item => (
+      <tr key={item.name}>
+        {columns[category].map(prop => {
+          const index = item.url.match(/\d+/g)[0];
+          return (
+            <td key={item[prop]}>
+              {prop === columns[category][0] ? (
+                <NavLink to={`/${category}/${index}`}>{item[prop]}</NavLink>
+              ) : (
+                item[prop]
+              )}
+            </td>
+          );
+        })}
+      </tr>
+    ));
     return (
       <div className="PeoplePage">
-        <h1>People page</h1>
+        <h2>{category} page</h2>
 
         {isLoaded ? (
           <>
             <Pagination count={count} page={page} />
-            <ul>
+            <table key={category} className="table">
+              <thead>
+                <tr className="thead-dark">
+                  {columns[category].map(key => (
+                    <th>{key.replace("_", " ")}</th>
+                  ))}
+                </tr>
+              </thead>
               {people.map(person => (
-                <li key={person.name || person.title}>
-                  <NavLink to={`./${category}/${person.url.match(/\d+/g)[0]}`}>
-                    {person.name || person.title}
-                  </NavLink>
-                </li>
+                <tbody>{swData}</tbody>
               ))}
-            </ul>
+            </table>
           </>
         ) : (
           <p>Loading...</p>
