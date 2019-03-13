@@ -1,16 +1,10 @@
 import React from "react";
-import {
-  BrowserRouter,
-  Route,
-  Switch,
-  NavLink,
-  Redirect
-} from "react-router-dom";
+import { Route, Switch, NavLink, Redirect } from "react-router-dom";
 
-import Catalog from "./components/Catalog";
-import Page from "./components/Page";
-import Home from "./components/Home";
-import config from "./components/config";
+import Catalog from "./Catalog";
+import Page from "./Page";
+import Home from "./Home";
+import config from "./config";
 
 const App = () => {
   return (

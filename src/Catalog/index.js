@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 
-import { getAll } from "../api/api";
-import config from "./config";
+import { getAll } from "../api";
+import config from "../config";
 import Datatable from "./Datatable";
 
 class Catalog extends Component {
   state = {
     data: [],
-    config: config,
+    config,
     api: ""
   };
 
@@ -36,7 +36,7 @@ class Catalog extends Component {
 
     const data = this.state.data.results || [];
 
-    return <Datatable api={api} data={data} />;
+    return <Datatable api={api} data={data} config={config} />;
   }
 }
 

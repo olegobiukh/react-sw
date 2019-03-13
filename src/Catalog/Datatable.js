@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import config from "./config";
+
+import Headers from "./components/Headers";
+import Rows from "./components/Rows";
 
 class Datatable extends Component {
   state = {
     sortColumn: null,
     sortAsc: true,
-    config,
     api: ""
   };
 
@@ -24,8 +25,7 @@ class Datatable extends Component {
   };
 
   render() {
-    const { api, data } = this.props;
-
+    const { api, data, config } = this.props;
     const sign = this.state.sortAsc ? 1 : -1;
 
     const visibleItems = this.state.sortColumn
@@ -39,43 +39,18 @@ class Datatable extends Component {
         })
       : data;
 
-    const swHeaders =
-      api &&
-      Object.entries(config[api]).map(([key, value]) => (
-        <th
-          key={key}
-          className={value.isSortable ? "sortable-column" : ""}
-          onClick={() => this.handleHeaderClick(api, key)}
-        >
-          {value.title}
-        </th>
-      ));
-
-    const swData =
-      visibleItems &&
-      visibleItems.map((item, i) => (
-        <tr key={i}>
-          {Object.keys(config[api]).map((prop, i) => {
-            const index = item.url.match(/\d+/g)[0];
-
-            return (
-              <td key={i}>
-                {prop === "name" || prop === "title" ? (
-                  <NavLink to={`/${api}/${index}`}>{item[prop]}</NavLink>
-                ) : (
-                  item[prop]
-                )}
-              </td>
-            );
-          })}
-        </tr>
-      ));
     return (
       <table className="table">
         <thead>
-          <tr className="thead-dark">{swHeaders}</tr>
+          <Headers
+            config={config}
+            api={api}
+            onHeaderClick={this.handleHeaderClick}
+          />
         </thead>
-        <tbody>{swData}</tbody>
+        <tbody>
+          <Rows config={config} api={api} visibleItems={visibleItems} />
+        </tbody>
       </table>
     );
   }

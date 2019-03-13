@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getAll } from "../api/api";
+import { getAll } from "../api";
 
 class Page extends Component {
   state = {

@@ -20,14 +20,14 @@ const config = {
       isSearchable: true
     },
     episode_id: {
-      title: "episode id",
+      title: "episode",
       isSortable: true
     },
     opening_crawl: {
       title: "opening crawl"
     },
     release_date: {
-      title: "release date",
+      title: "release",
       isSortable: true
     }
   },
@@ -66,7 +66,7 @@ const config = {
       isSearchable: true
     },
     cost_in_credits: {
-      title: "cost in credits",
+      title: "cost (credits)",
       isSortable: true
     },
     model: {
@@ -80,7 +80,7 @@ const config = {
       isSearchable: true
     },
     cost_in_credits: {
-      title: "cost in credits",
+      title: "cost (credits)",
       isSortable: true
     },
     model: {
