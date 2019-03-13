@@ -1,8 +1,8 @@
 [Preview](https://olegobiukh.github.io/react-sw/)
 
-[Pull](https://github.com/olegobiukh/react-sw/pull/1)
+[Pull](https://github.com/olegobiukh/react-sw/pull/4)
 
 [Code](https://github.com/olegobiukh/react-sw/tree/dev)
 
 ---
-[CodeSandbox](https://codesandbox.io/s/j3j5p8117v)
+[CodeSandbox](https://codesandbox.io/s/l54j71m5nz)
