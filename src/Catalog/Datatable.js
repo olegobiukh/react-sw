@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
 
 import Headers from "./components/Headers";
 import Rows from "./components/Rows";

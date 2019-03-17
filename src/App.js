@@ -4,28 +4,17 @@ import { Route, Switch, NavLink, Redirect } from "react-router-dom";
 import Catalog from "./Catalog";
 import Page from "./Page";
 import Home from "./Home";
-import config from "./config";
 
 const App = () => {
   return (
     <>
-      <div className="float-left List">
-        <ul>
-          <li>
-            <NavLink to="/" className="List__item">
-              Home
-            </NavLink>
-          </li>
-          {Object.keys(config).map((title, i) => (
-            <li key={i}>
-              <NavLink to={`/${title}`} className="List__item">
-                {title}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="Catalog float-left">
+      <div className="stars" />
+      <div className="twinkling" />
+      <div className="Catalog">
+        <NavLink to="/" className="Logo">
+          <div className="Logo__title">star</div>
+          <div className="Logo__title">wars</div>
+        </NavLink>
         <Switch>
           <Route
             exact

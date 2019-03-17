@@ -1,16 +1,23 @@
 import React from "react";
-
-import Gallery from "./Gallery";
+import { NavLink } from "react-router-dom";
+import { config } from "../config";
 
 const Home = () => {
   return (
     <>
-      <div className="container">
-        <div className="page-header">
-          <h1>Home page</h1>
-        </div>
+      <div className="grid">
+        {Object.keys(config).map((title, i) => (
+          <NavLink key={i} to={`/${title}`} className="List__item">
+            <span className="List__title">{title}</span>
+            <img
+              src={`https://starwars-visualguide.com/assets/img/categories/${
+                title !== "people" ? title : "character"
+              }.jpg`}
+              alt="Star Wars"
+            />
+          </NavLink>
+        ))}
       </div>
-      <Gallery />
     </>
   );
 };

@@ -89,4 +89,17 @@ const config = {
   }
 };
 
-export default config;
+const dataDisplayNot = ["created", "edited", "url", "homeworld"];
+const dataDisplayOut = [
+  "characters",
+  "pilots",
+  "residents",
+  "people",
+  "films",
+  "planets",
+  "species",
+  "starships",
+  "vehicles"
+];
+
+export { config, dataDisplayNot, dataDisplayOut };
