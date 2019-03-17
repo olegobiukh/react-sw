@@ -17,7 +17,7 @@ a:hover {
 
 .grid {
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 2vw;
 }
@@ -36,6 +36,7 @@ a:hover {
 body {
   padding-top: 260px;
   color: rgba(0, 0, 0, 0.54);
+  padding-bottom: 100px;
 }
 
 .stars {

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
 
 import { getOne, getByUrl } from "../api";
 import { dataDisplayNot, dataDisplayOut } from "../config";
+import PageCategories from "./components/PageCategories";
+import Main from "./components/Main";
 
 class Page extends Component {
   state = {
@@ -64,6 +65,10 @@ class Page extends Component {
       data.hasOwnProperty("planets") &&
       (await Promise.all(data.planets.map(itemUrl => getByUrl(itemUrl))));
 
+    const pilots =
+      data.hasOwnProperty("pilots") &&
+      (await Promise.all(data.pilots.map(itemUrl => getByUrl(itemUrl))));
+
     this.setState({
       id,
       api,
@@ -76,23 +81,11 @@ class Page extends Component {
         characters: characters || [],
         planets: planets || [],
         people: people || [],
-        residents: residents || []
+        residents: residents || [],
+        pilots: pilots || []
       }
     });
   }
-  handleBigImgError = event => {
-    event.target.onError = null;
-    event.target.src =
-      "https://starwars-visualguide.com/assets/img/big-placeholder.jpg";
-    event.target.height = "400";
-    event.target.width = "100";
-  };
-
-  handleImgError = event => {
-    event.target.onError = null;
-    event.target.src =
-      "https://starwars-visualguide.com/assets/img/placeholder-small.jpg";
-  };
 
   render() {
     const data = this.state.data;
@@ -100,94 +93,14 @@ class Page extends Component {
 
     return (
       <div>
-        <div className="Page">
-          <div className="Page__img-big">
-            <img
-              src={`https://starwars-visualguide.com/assets/img/${
-                api !== "people" ? api : "characters"
-              }/${id}.jpg`}
-              alt="star wars"
-              onError={this.handleBigImgError.bind(this)}
-            />
-          </div>
-
-          <div className="Page__data">
-            {data ? (
-              Object.keys(data).map((key, order) => {
-                if (
-                  !dataDisplayNot.includes(key) &&
-                  !dataDisplayOut.includes(key) &&
-                  data[key] !== "unknown"
-                ) {
-                  if (key === "name" || key === "title") {
-                    return <h1 key={order}>{data[key]}</h1>;
-                  } else {
-                    return (
-                      <p key={key}>
-                        <span
-                          className={key === "opening_crawl" ? "Page__key" : ""}
-                        >
-                          {key}:
-                        </span>
-                        {data[key]}
-                      </p>
-                    );
-                  }
-                }
-              })
-            ) : (
-              <div className="loading" />
-            )}
-          </div>
-        </div>
-        <div className="grid">
-          {data &&
-            dataDisplayOut.map((category, clue) => {
-              return (
-                data.hasOwnProperty(category) &&
-                data[category].length !== 0 && (
-                  <div key={clue} className="Page-Category">
-                    <div className="Page-Category__title">
-                      <strong>Related {category}</strong>
-                    </div>
-                    {data[category].map((item, i) => {
-                      const index = item.url
-                        ? item.url.match(/\d+/g)[0]
-                        : item.match(/\d+/g)[0];
-
-                      return (
-                        <div key={i} className="Page-Category__box">
-                          <img
-                            className="Page-Category__image"
-                            src={`https://starwars-visualguide.com/assets/img/${
-                              /(people|pilots|residents)/gi.test(category)
-                                ? "characters"
-                                : category
-                            }/${index}.jpg`}
-                            alt="Star Wars"
-                            onError={this.handleImgError.bind(this)}
-                          />
-                          <p>
-                            <NavLink
-                              to={`/${
-                                /(characters|people|pilots|residents)/gi.test(
-                                  category
-                                )
-                                  ? "people"
-                                  : category
-                              }/${index}`}
-                            >
-                              {item.name || item.title}
-                            </NavLink>
-                          </p>
-                        </div>
-                      );
-                    })}
-                  </div>
-                )
-              );
-            })}
-        </div>
+        <Main
+          api={api}
+          id={id}
+          data={data}
+          dataDisplayNot={dataDisplayNot}
+          dataDisplayOut={dataDisplayOut}
+        />
+        <PageCategories data={data} dataDisplayOut={dataDisplayOut} />
       </div>
     );
   }
