@@ -5,4 +5,4 @@
 [Code](https://github.com/olegobiukh/react-sw/tree/dev)
 
 ---
-[CodeSandbox](https://codesandbox.io/s/l54j71m5nz)
+[CodeSandbox](https://codesandbox.io/s/yp83q68njx)
