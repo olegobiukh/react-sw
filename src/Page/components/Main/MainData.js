@@ -22,11 +22,13 @@ const MainData = ({ api, id, data, dataDisplayNot, dataDisplayOut }) => {
                 </p>
               );
             }
+          } else {
+            return null;
           }
         })
       ) : (
-        <div className="loading" />
-      )}
+          <div className="loading" />
+        )}
     </div>
   );
 };
