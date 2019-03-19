@@ -10,8 +10,7 @@ class Page extends Component {
     configCategories: null,
     data: null,
     api: "",
-    id: "",
-    content: null
+    id: ""
   };
 
   componentDidMount() {

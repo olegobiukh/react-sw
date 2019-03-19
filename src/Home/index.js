@@ -8,7 +8,9 @@ const Home = () => {
       <div className="grid">
         {Object.keys(config).map((title, i) => (
           <NavLink key={i} to={`/${title}`} className="List__item">
-            <span className="List__title">{title}</span>
+            <div className="List__background">
+              <span className="List__title">{title}</span>
+            </div>
             <img
               src={`https://starwars-visualguide.com/assets/img/categories/${
                 title !== "people" ? title : "character"

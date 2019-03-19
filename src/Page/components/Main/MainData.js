@@ -16,7 +16,7 @@ const MainData = ({ api, id, data, dataDisplayNot, dataDisplayOut }) => {
               return (
                 <p key={key}>
                   <span className={key === "opening_crawl" ? "Page__key" : ""}>
-                    {key}:
+                    {key.replace("_", " ")}:
                   </span>
                   {data[key]}
                 </p>

@@ -39,12 +39,6 @@ body {
   padding-bottom: 100px;
 }
 
-.stars {
-  background: #000
-    url(http://www.script-tutorials.com/demos/360/images/stars.png) top center;
-  background-size: cover;
-}
-
 .stars,
 .twinkling {
   position: fixed;
@@ -58,10 +52,28 @@ body {
   z-index: -1;
 }
 
+.stars {
+  background: #000
+    url(http://www.script-tutorials.com/demos/360/images/stars.png) top center;
+}
+
 .twinkling {
   background: url(http://www.script-tutorials.com/demos/360/images/twinkling.png)
-    top center;
-  animation: move-twink-back 200s linear infinite;
+    top;
+  animation-name: move-twinking;
+  animation-duration: 300s;
+  animation-timing-function: linear;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes move-twinking {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -10000px 5000px;
+  }
 }
 
 .Catalog {
@@ -74,7 +86,7 @@ body {
   position: absolute;
   top: 50px;
   left: 50%;
-  margin-left: -75px;
+  margin-left: -168px;
   text-align: center;
   line-height: 0.9;
 }
@@ -84,7 +96,7 @@ body {
 }
 
 .Logo__title {
-  font-family: "Londrina Outline", cursive;
+  font-family: "Bungee Shade", cursive;
   font-size: 5em;
   font-weight: 400;
   color: #ffe343;
@@ -103,25 +115,172 @@ body {
   position: relative;
   border: 1px solid #454d55;
   background-color: #343a40;
-}
-
-.List__item:hover {
+  font-size: 30px;
   color: #fff;
 }
 
-.List__title {
+.List__background {
   position: absolute;
-  right: 10px;
   bottom: 10px;
   background-color: rgba(56, 55, 55, 0.4);
-  padding: 0 5px 0 20px;
-  font-size: 30px;
+  width: 100%;
 }
 
-.List__item:hover .List__title {
+.List__item:hover .List__background {
+  top: 0;
+  bottom: 0;
+  text-align: center;
+  padding-top: 50px;
   background-color: rgba(43, 34, 34, 0.87);
+  color: #fff;
+  animation-name: title;
+  animation-duration: 1s;
 }
 
+@keyframes title {
+  from {
+    padding-top: 0;
+    color: transparent;
+  }
+  to {
+    padding-top: 50px;
+    color: #fff;
+  }
+}
+
+/*Search*/
+.Search {
+  position: relative;
+  margin: auto;
+  width: 100%;
+  max-width: 280px;
+}
+
+.Search .label {
+  position: absolute;
+  top: 16px;
+  left: 0;
+  font-size: 16px;
+  color: #9098a9;
+  font-weight: 500;
+  transform-origin: 0 0;
+  transition: all 0.2s ease;
+}
+
+.Search .border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #07f;
+  transform: scaleX(0);
+  transform-origin: 0 0;
+  transition: all 0.15s ease;
+}
+
+.Search input {
+  -webkit-appearance: none;
+  width: 100%;
+  border: 0;
+  font-family: inherit;
+  padding: 12px 0;
+  height: 48px;
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: 2px solid #c8ccd4;
+  background: none;
+  border-radius: 0;
+  color: #fff;
+  transition: all 0.15s ease;
+}
+
+.Search input:hover {
+  background: rgba(34, 50, 84, 0.03);
+}
+
+.Search input:not(:placeholder-shown) + span {
+  color: #5a667f;
+  transform: translateY(-26px) scale(0.75);
+}
+
+.Search input:focus {
+  background: none;
+  outline: none;
+}
+
+.Search input:focus + span {
+  color: #07f;
+  transform: translateY(-26px) scale(0.75);
+}
+
+.Search input:focus + span + .border {
+  transform: scaleX(1);
+}
+
+/*Pagination*/
+[data-pagination],
+[data-pagination] *,
+[data-pagination] *:before,
+[data-pagination] *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-kerning: auto;
+}
+[data-pagination] {
+  font-size: 8pt;
+  line-height: 1;
+  font-weight: 400;
+  font-family: "Open Sans", "Source Sans Pro", Roboto, "HelveticaNeue-Light",
+    "Helvetica Neue Light", "Helvetica Neue", "Myriad Pro", "Segoe UI", Myriad,
+    Helvetica, "Lucida Grande", "DejaVu Sans Condensed", "Liberation Sans",
+    "Nimbus Sans L", Tahoma, Geneva, Arial, sans-serif;
+  -webkit-text-size-adjust: 100%;
+  margin: 1em auto;
+  text-align: center;
+  transition: font-size 0.2s ease-in-out;
+}
+[data-pagination] ul {
+  list-style-type: none;
+  display: inline;
+  font-size: 100%;
+  margin: 0;
+  padding: 0.5em;
+}
+[data-pagination] ul li {
+  display: inline-block;
+  font-size: 100%;
+  width: auto;
+  border-radius: 3px;
+}
+[data-pagination] > a {
+  font-size: 140%;
+}
+[data-pagination] a {
+  color: #777;
+  font-size: 16px;
+  padding: 0.5em;
+}
+[data-pagination] a:focus,
+[data-pagination] a:hover {
+  color: #f60;
+}
+[data-pagination] li.current {
+  background: rgba(0, 0, 0, 0.1);
+}
+/* Disabled & Hidden Styles */
+[data-pagination] .disabled,
+[data-pagination] [hidden],
+[data-pagination] [disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/*Category*/
 .sortable-column {
   cursor: pointer;
 }
