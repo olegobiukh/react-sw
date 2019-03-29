@@ -12,7 +12,7 @@ const Home = () => {
               <span className="List__title">{title}</span>
             </div>
             <img
-              src={`https://starwars-visualguide.com/assets/img/categories/${
+              src={`https://raw.githubusercontent.com/olegobiukh/other/master/sw/img/categories/${
                 title !== "people" ? title : "character"
               }.jpg`}
               alt="Star Wars"
